@@ -34,6 +34,9 @@
 
     <EditText
         android:id="@+id/etWeight"
+        android:digits="0123456789"
+        android:maxLines="1"
+        android:inputType="number"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="75sp"
@@ -55,6 +58,9 @@
 
     <EditText
         android:id="@+id/etHeight"
+        android:digits="0123456789"
+        android:maxLines="1"
+        android:inputType="number"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:layout_marginLeft="260sp"
@@ -66,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#2CD3BE"
-        android:text="Calculate" />
+        android:backgroundTint="#2c9ed3"
+        android:text="Start" />
 
     <TextView
         android:id="@+id/bmi_tv"
