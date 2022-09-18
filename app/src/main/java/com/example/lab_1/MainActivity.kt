@@ -2,19 +2,32 @@ package com.example.lab_1
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        calculate_btn.setOnClickListener {
-            val height = (etHeight.text.toString()).toInt()
-            val weight = (etWeight.text.toString()).toInt()
+        val weight = findViewById<EditText>(R.id.weight_val)
+        val height = findViewById<EditText>(R.id.height_val)
+        val calculate_btn = findViewById<Button>(R.id.calculate_btn)
 
-            val BMI = calculateBMI(height, weight)
+
+        calculate_btn.setOnClickListener {
+            var weightValue = 0.0
+            var heightValue = 0.0
+            if (weight.text.toString().isNotEmpty()) {
+                weightValue = weight.text.toString().toDouble()
+            }
+            if (height.text.toString().isNotEmpty()) {
+                heightValue = (height.text.toString().toDouble() / 100)
+            }
+            val BMI = calculateBMI(heightValue, weightValue)
             bmi.text = BMI.toString()
             bmi.visibility = View.VISIBLE
 
@@ -27,14 +40,15 @@ class MainActivity : AppCompatActivity() {
             } else  {
                 status.text = "Obese"
             }
-            bmi_tv.visibility = View.VISIBLE
+            val ed=String.format("%.2f",BMI)
+            bmi.text =ed
+            bmi.visibility = View.VISIBLE
             status.visibility = View.VISIBLE
         }
     }
 
-    private fun calculateBMI(height: Int, weight: Int): Float {
-        val doubleHeight = height.toFloat() / 100
-        val BMI = weight.toFloat() / (doubleHeight * doubleHeight)
+    private fun calculateBMI(height: Double, weight: Double): Double {
+        val BMI = weight / (height * height)
         return BMI
     }
 }
