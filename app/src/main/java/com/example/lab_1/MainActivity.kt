@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
 
         val weight = findViewById<EditText>(R.id.weight_val)
         val height = findViewById<EditText>(R.id.height_val)
-        val calculate_btn = findViewById<Button>(R.id.calculate_btn)
+        val calc_btn = findViewById<Button>(R.id.calculate_btn)
 
 
-        calculate_btn.setOnClickListener {
+        calc_btn.setOnClickListener {
             var weightValue = 0.0
             var heightValue = 0.0
             if (weight.text.toString().isNotEmpty()) {
@@ -27,28 +27,26 @@ class MainActivity : AppCompatActivity() {
             if (height.text.toString().isNotEmpty()) {
                 heightValue = (height.text.toString().toDouble() / 100)
             }
-            val BMI = calculateBMI(heightValue, weightValue)
-            bmi.text = BMI.toString()
+            val index = calc(heightValue, weightValue)
+            bmi.text = index.toString()
             bmi.visibility = View.VISIBLE
 
-            if (BMI < 18.5) {
+            if (index < 18.5) {
                 status.text = "Under Weight"
-            } else if (BMI >= 18.5 && BMI < 24.9) {
+            } else if (index >= 18.5 && index < 24.9) {
                 status.text = "Healthy"
-            } else if (BMI >= 25 && BMI < 30) {
+            } else if (index >= 25 && index < 30) {
                 status.text = "Overweight"
             } else  {
                 status.text = "Obese"
             }
-            val ed=String.format("%.2f",BMI)
+            val ed=String.format("%.2f",index)
             bmi.text =ed
             bmi.visibility = View.VISIBLE
             status.visibility = View.VISIBLE
-        }
-    }
-
-    private fun calculateBMI(height: Double, weight: Double): Double {
-        val BMI = weight / (height * height)
-        return BMI
+        } }
+    private fun calc(height: Double, weight: Double): Double {
+        val index = weight / (height * height)
+        return index
     }
 }
